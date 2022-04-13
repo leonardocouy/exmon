@@ -17,6 +17,17 @@ defmodule ExMon do
   end
 
   def make_move(move) do
-    Actions.fetch_move(move)
+    move
+    |> Actions.fetch_move()
+    |> execute_move_action()
+  end
+
+  defp execute_move_action({:error, move}), do: Status.print_wrong_move_message(move)
+
+  defp execute_move_action({:ok, move}) do
+    case move do
+      :move_heal -> "realiza_cura"
+      move -> Actions.attack(move)
+    end
   end
 end
