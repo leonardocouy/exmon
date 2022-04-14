@@ -4,6 +4,7 @@ defmodule ExMon do
 
   @computer_name "Crazy Rooster"
   @computer_moves [:move_avg, :move_rnd, :move_heal]
+  @weighted_computer_moves [{1, :move_avg}, {1, :move_rnd}, {10, :move_heal}]
 
   def create_player(name, move_avg, move_rnd, move_heal) do
     Player.build(name, move_rnd, move_avg, move_heal)
@@ -44,10 +45,22 @@ defmodule ExMon do
     Status.print_round_message(Game.info())
   end
 
-  defp computer_move(%{turn: :computer, status: :in_progress}) do
-    move = {:ok, Enum.random(@computer_moves)}
+  defp computer_move(%{turn: :computer, status: :in_progress, computer: computer})
+       when computer.life < 40 do
+    move =
+      @weighted_computer_moves
+      |> Enum.map(fn {weight, move} -> List.duplicate(move, weight) end)
+      |> List.flatten()
+      |> Enum.random()
 
-    execute_move_action(move)
+    execute_move_action({:ok, move})
+  end
+
+  defp computer_move(%{turn: :computer, status: :in_progress, computer: computer})
+       when computer.life > 40 do
+    move = Enum.random(@computer_moves)
+
+    execute_move_action({:ok, move})
   end
 
   defp computer_move(_), do: :ok
