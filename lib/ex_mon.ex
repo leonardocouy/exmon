@@ -11,11 +11,18 @@ defmodule ExMon do
   end
 
   def start_game(player) do
+    initial_turn = Enum.random([:computer, :player])
+
     @computer_name
     |> create_player(:punch, :kick, :heal)
-    |> Game.start(player)
+    |> Game.start(player, initial_turn)
 
     Status.print_round_message(Game.info())
+
+    case initial_turn do
+      :computer -> computer_move(%{Game.info() | status: :in_progress})
+      _ -> :ok
+    end
   end
 
   def make_move(move) do

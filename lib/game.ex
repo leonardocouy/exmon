@@ -2,11 +2,11 @@ defmodule ExMon.Game do
   alias ExMon.Player
   use Agent
 
-  def start(computer, player) do
+  def start(computer, player, turn \\ :player) do
     initial_value = %{
       computer: computer,
       player: player,
-      turn: :player,
+      turn: turn,
       status: :started
     }
 
