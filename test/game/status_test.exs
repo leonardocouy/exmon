@@ -8,7 +8,7 @@ defmodule ExMon.Game.StatusTest do
 
   describe "print_round_message/1" do
     test "when the game info has status started, returns the game is started message" do
-      game_info =  %{
+      game_info = %{
         computer: %Player{
           life: 100,
           moves: %{move_avg: :punch, move_heal: :heal, move_rnd: :kick},
@@ -34,7 +34,7 @@ defmodule ExMon.Game.StatusTest do
     end
 
     test "when the game info has status in_progress, returns the message saying that's the turn for the given player" do
-      game_info =  %{
+      game_info = %{
         computer: %Player{
           life: 100,
           moves: %{move_avg: :punch, move_heal: :heal, move_rnd: :kick},
@@ -60,7 +60,7 @@ defmodule ExMon.Game.StatusTest do
     end
 
     test "when the game info has status game_over, returns the game is over message" do
-      game_info =  %{
+      game_info = %{
         computer: %Player{
           life: 100,
           moves: %{move_avg: :punch, move_heal: :heal, move_rnd: :kick},
