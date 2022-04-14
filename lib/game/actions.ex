@@ -12,14 +12,14 @@ defmodule ExMon.Game.Actions do
   def attack(move) do
     case Game.turn() do
       :player -> Attack.attack_opponent(:computer, move)
-      :computer ->  Attack.attack_opponent(:player, move)
+      :computer -> Attack.attack_opponent(:player, move)
     end
   end
 
   def fetch_move(move) do
-    Game.player
-      |> Map.get(:moves)
-      |> find_move(move)
+    Game.player()
+    |> Map.get(:moves)
+    |> find_move(move)
   end
 
   defp find_move(moves, move) do

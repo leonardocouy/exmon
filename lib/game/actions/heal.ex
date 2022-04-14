@@ -6,10 +6,10 @@ defmodule ExMon.Game.Actions.Heal do
 
   def heal_life(player) do
     player
-      |> Game.fetch_player()
-      |> Map.get(:life)
-      |> calculate_total_life()
-      |> set_life(player)
+    |> Game.fetch_player()
+    |> Map.get(:life)
+    |> calculate_total_life()
+    |> set_life(player)
   end
 
   defp calculate_total_life(life), do: Enum.random(@move_heal_power) + life

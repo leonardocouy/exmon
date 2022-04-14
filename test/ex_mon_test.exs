@@ -57,6 +57,7 @@ defmodule ExMonTest do
 
     test "when the move is valid and current game status is game over, returns the end game message" do
       new_computer_state = %{Game.fetch_player(:computer) | life: 0}
+
       messages =
         capture_io(fn ->
           Game.update(%{Game.info() | computer: new_computer_state})

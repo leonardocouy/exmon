@@ -16,6 +16,7 @@ defmodule ExMon.GameTest do
     test "returns the current game state" do
       player = Player.build("Leo", :kick, :punch, :heal)
       computer = Player.build("Crazy Rooster", :kick, :punch, :heal)
+
       expected_response = %{
         computer: %Player{
           life: 100,
@@ -30,6 +31,7 @@ defmodule ExMon.GameTest do
         status: :started,
         turn: :player
       }
+
       Game.start(computer, player)
 
       assert Game.info() == expected_response
@@ -40,6 +42,7 @@ defmodule ExMon.GameTest do
     test "returns the game state updated" do
       player = Player.build("Leo", :kick, :punch, :heal)
       computer = Player.build("Crazy Rooster", :kick, :punch, :heal)
+
       expected_current_state = %{
         computer: %Player{
           life: 100,
@@ -54,6 +57,7 @@ defmodule ExMon.GameTest do
         status: :started,
         turn: :player
       }
+
       new_state = %{
         computer: %Player{
           life: 85,
@@ -80,11 +84,13 @@ defmodule ExMon.GameTest do
     test "returns the player info" do
       player = Player.build("Leo", :kick, :punch, :heal)
       computer = Player.build("Crazy Rooster", :kick, :punch, :heal)
+
       expected_response = %Player{
         life: 100,
         moves: %{move_avg: :punch, move_heal: :heal, move_rnd: :kick},
         name: "Leo"
       }
+
       Game.start(computer, player)
 
       assert Game.player() == expected_response
@@ -105,11 +111,13 @@ defmodule ExMon.GameTest do
     test "returns the current info for the given player" do
       player = Player.build("Leo", :kick, :punch, :heal)
       computer = Player.build("Crazy Rooster", :kick, :punch, :heal)
+
       expected_response = %Player{
         life: 100,
         moves: %{move_avg: :punch, move_heal: :heal, move_rnd: :kick},
         name: "Crazy Rooster"
       }
+
       Game.start(computer, player)
 
       assert Game.fetch_player(:computer) == expected_response

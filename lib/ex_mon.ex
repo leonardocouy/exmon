@@ -11,8 +11,8 @@ defmodule ExMon do
 
   def start_game(player) do
     @computer_name
-      |> create_player(:punch, :kick, :heal)
-      |> Game.start(player)
+    |> create_player(:punch, :kick, :heal)
+    |> Game.start(player)
 
     Status.print_round_message(Game.info())
   end
@@ -24,6 +24,7 @@ defmodule ExMon do
   end
 
   defp handle_game_status(:game_over, _move), do: Status.print_round_message(Game.info())
+
   defp handle_game_status(_other, move) do
     move
     |> Actions.fetch_move()
