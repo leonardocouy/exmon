@@ -2,10 +2,10 @@ defmodule ExMon.Game.Actions do
   alias ExMon.Game
   alias ExMon.Game.Actions.{Attack, Heal}
 
-  def heal() do
+  def heal do
     case Game.turn() do
       :player -> Heal.heal_life(:player)
-      :computer ->  Heal.heal_life(:computer)
+      :computer -> Heal.heal_life(:computer)
     end
   end
 
