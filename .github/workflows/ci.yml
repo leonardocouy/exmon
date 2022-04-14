@@ -1,9 +1,9 @@
-name: Lint
+name: CI
 
 on: [push, pull_request]
 
 jobs:
-  lint:
+  ci:
     runs-on: "ubuntu-20.04"
     strategy:
       matrix:
@@ -27,3 +27,5 @@ jobs:
         run: mix format --check-formatted
       - name: Review Code With Credo
         run: mix credo --strict
+      - name: Tests
+        run: mix test
